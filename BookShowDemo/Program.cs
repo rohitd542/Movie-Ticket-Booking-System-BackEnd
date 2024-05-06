@@ -85,6 +85,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddScoped<IRegistrationRepository, RegistrationRepository>();
+builder.Services.AddScoped<IFindTicketRepository, FindTicketRepository>();
+builder.Services.AddScoped<IBookTicketRepository, BookTicketRepository>();
 
 builder.Services.AddDbContext<SaveUrShowUsingCFADbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("DBConnection")));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -116,8 +118,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-/*builder.Services.AddAuthorization();
-*/
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
