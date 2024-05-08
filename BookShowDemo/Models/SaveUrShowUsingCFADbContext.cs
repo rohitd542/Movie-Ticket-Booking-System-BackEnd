@@ -22,5 +22,13 @@ namespace SaveUrShowUsingCFA.models
         public DbSet<FindTicket> FindTicket { get; set; }
         public DbSet<BookTicket> BookTicket { get; set; }
 
+        //Default value as a usertype as a Customer.
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Registration>()
+                .Property(b => b.usertype)
+                .HasDefaultValue("Customer");
+        }
+
     }
 }

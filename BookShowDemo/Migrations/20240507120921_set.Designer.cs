@@ -12,7 +12,7 @@ using SaveUrShowUsingCFA.models;
 namespace SaveUrShowUsingCFA.Migrations
 {
     [DbContext(typeof(SaveUrShowUsingCFADbContext))]
-    [Migration("20240425192519_set")]
+    [Migration("20240507120921_set")]
     partial class set
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -122,7 +122,9 @@ namespace SaveUrShowUsingCFA.Migrations
 
                     b.Property<string>("usertype")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("Customer");
 
                     b.HasKey("userid");
 

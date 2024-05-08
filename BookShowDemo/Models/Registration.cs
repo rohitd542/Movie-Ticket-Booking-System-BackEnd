@@ -25,6 +25,6 @@ namespace SaveUrShowUsingCFA.models
         [Required(ErrorMessage = "confirmpassword is requied")]
         [Compare("password", ErrorMessage = "password and confirmation password must match")]
         public string confirmpassword { get; set; }
-        public string usertype { get; set; }
+        public string usertype { get;}
     }
 }

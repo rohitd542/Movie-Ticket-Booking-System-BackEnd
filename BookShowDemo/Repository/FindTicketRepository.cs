@@ -53,5 +53,10 @@ namespace SaveUrShowUsingCFA.Repository
             return findTicket;
         }
 
+        private bool FindTicketExists(int id)
+        {
+            return _context.FindTicket.Any(e => e.MovieId == id);
+        }
+
     }
 }

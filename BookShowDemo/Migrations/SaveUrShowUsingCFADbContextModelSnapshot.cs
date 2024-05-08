@@ -44,6 +44,10 @@ namespace SaveUrShowUsingCFA.Migrations
 
                     b.HasKey("Bookid");
 
+                    b.HasIndex("MovieId");
+
+                    b.HasIndex("UserId");
+
                     b.ToTable("BookTicket");
                 });
 
@@ -116,11 +120,28 @@ namespace SaveUrShowUsingCFA.Migrations
 
                     b.Property<string>("usertype")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("Customer");
 
                     b.HasKey("userid");
 
                     b.ToTable("Registration");
+                });
+
+            modelBuilder.Entity("SaveUrShowUsingCFA.models.BookTicket", b =>
+                {
+                    b.HasOne("SaveUrShowUsingCFA.models.FindTicket", "Movie")
+                        .WithMany()
+                        .HasForeignKey("MovieId");
+
+                    b.HasOne("SaveUrShowUsingCFA.models.Registration", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Movie");
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

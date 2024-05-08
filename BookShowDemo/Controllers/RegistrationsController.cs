@@ -54,7 +54,7 @@ namespace SaveUrShowUsingCFA.Controllers
             }
         }
 
-        [HttpGet("{email}/{password}")]
+        [HttpPost("{email}/{password}")]
         public async Task<ActionResult<Registration>> GetRegistration(string email, string password)
         {
             Hashtable err = new Hashtable();
@@ -80,9 +80,6 @@ namespace SaveUrShowUsingCFA.Controllers
             }
         }
 
-        // PUT: api/Registrations/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRegistration(int id, Registration registration)
         {
@@ -91,30 +88,22 @@ namespace SaveUrShowUsingCFA.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(registration).State = EntityState.Modified;
-
-            try
+            var user = _context.Registration.FirstOrDefault(t => t.userid == registration.userid);
+            if (user != null)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!RegistrationExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                user.username = registration.username;
+                user.password = registration.password;
+                user.email = registration.email;
+                user.confirmpassword = registration.confirmpassword;
 
-            return NoContent();
+            }
+            _context.SaveChanges();
+            return Ok();
+
+
         }
 
         // POST: api/Registrations
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<Registration>> PostRegistration(Registration registration)
         {
@@ -139,16 +128,6 @@ namespace SaveUrShowUsingCFA.Controllers
                 _logger.LogError(ex.Message);
                 return NotFound();
             }
-            //var registration = await _context.Registration.FindAsync(id);
-            //if (registration == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //_context.Registration.Remove(registration);
-            //await _context.SaveChangesAsync();
-
-            //return registration;
         }
 
 

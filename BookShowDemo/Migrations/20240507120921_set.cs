@@ -38,7 +38,7 @@ namespace SaveUrShowUsingCFA.Migrations
                     email = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     password = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     confirmpassword = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    usertype = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    usertype = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "Customer")
                 },
                 constraints: table =>
                 {
