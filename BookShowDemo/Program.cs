@@ -28,16 +28,21 @@ builder.Services.AddSwaggerGen(c =>
         Description = "A Place Where You Can Book Your Fav Movies As of Your Choises In A Easy Way ! Enjoy Your Time 🍿 With Your Friends🎞️..",
     });
 });
-builder.Services.AddAuthentication(options =>
+
+/*builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(o =>
+})*/
+
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+.AddJwtBearer(o =>
 {
     o.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,
         ValidateAudience = true,
-        ValidateLifetime = false,
+        ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
         ValidAudience = builder.Configuration["Jwt:Audience"],

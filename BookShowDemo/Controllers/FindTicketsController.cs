@@ -2,6 +2,7 @@
 using SaveUrShowUsingCFA.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SaveUrShowUsingCFA.Controllers
 {
@@ -23,6 +24,7 @@ namespace SaveUrShowUsingCFA.Controllers
         }
 
         [HttpGet]
+        //[Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<FindTicket>>> GetFindTicket()
         {
             return await _findTicketRepository.GetFindTicket();
@@ -61,6 +63,7 @@ namespace SaveUrShowUsingCFA.Controllers
         }
 
     [HttpPost]
+      [Authorize(Roles ="Admin")]
         public async Task<ActionResult<FindTicket>> PostFindTicket(FindTicket findTicket)
         {
             /* _context.FindTicket.Add(findTicket);

@@ -33,7 +33,7 @@ namespace SaveUrShowUsingCFA.Controllers
         [HttpGet("{userId}")]
         public async Task<ActionResult<IEnumerable<BookTicket>>> GetBookTicketsByUserId(long userId)
         {
-            // Find all book tickets for the given user ID
+    
             /* var bookTickets = await _context.BookTicket.Where(bt => bt.UserId == userId).ToListAsync();*/
             var bookTickets = await _bookTicketRepository.GetBookTicketsByUserId(userId);
 

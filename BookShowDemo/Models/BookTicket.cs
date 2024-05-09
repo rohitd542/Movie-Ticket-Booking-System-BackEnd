@@ -20,6 +20,9 @@ namespace SaveUrShowUsingCFA.models
         public DateTime? Date { get; set; }
 
 
+
+
+
         /*public virtual FindTicket Movie { get; set; }
         public virtual Registration User { get; set; }*/
 

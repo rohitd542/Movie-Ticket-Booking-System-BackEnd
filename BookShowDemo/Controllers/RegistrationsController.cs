@@ -17,14 +17,14 @@ namespace SaveUrShowUsingCFA.Controllers
     [ApiController]
     public class RegistrationsController : ControllerBase
     {
-        private readonly SaveUrShowUsingCFADbContext _context;
+        /*private readonly SaveUrShowUsingCFADbContext _context;*/
         private readonly IRegistrationRepository _registrationRepository;
         private readonly ILogger<RegistrationsController> _logger;
 
-        public RegistrationsController(SaveUrShowUsingCFADbContext context, IRegistrationRepository registrationRepository,
+        public RegistrationsController( IRegistrationRepository registrationRepository,
           ILogger<RegistrationsController> logger)
         {
-            _context = context;
+          /*  _context = context;*/
             _registrationRepository = registrationRepository;
             _logger = logger;
 
@@ -81,26 +81,22 @@ namespace SaveUrShowUsingCFA.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRegistration(int id, Registration registration)
+         public async Task<IActionResult> PutRegistration(int id, Registration registration)
         {
             if (id != registration.userid)
             {
                 return BadRequest();
             }
 
-            var user = _context.Registration.FirstOrDefault(t => t.userid == registration.userid);
-            if (user != null)
+            var res = await _registrationRepository.PutRegistration(id, registration);
+            if (res != null)
             {
-                user.username = registration.username;
-                user.password = registration.password;
-                user.email = registration.email;
-                user.confirmpassword = registration.confirmpassword;
-
+                return Ok();
             }
-            _context.SaveChanges();
-            return Ok();
-
-
+            else
+            {
+                return NotFound();
+            }
         }
 
         // POST: api/Registrations
@@ -131,9 +127,6 @@ namespace SaveUrShowUsingCFA.Controllers
         }
 
 
-        private bool RegistrationExists(int id)
-        {
-            return _context.Registration.Any(e => e.userid == id);
-        }
+  
     }
 }

@@ -75,9 +75,21 @@ namespace SaveUrShowUsingCFA.Repository
 
         public async Task<ActionResult<Registration>> PutRegistration(int id, Registration registration)
         {
-            _context.Entry(registration).State = EntityState.Modified;
+            /*context.Entry(registration).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return registration;
+            return registration;*/
+            var user = _context.Registration.FirstOrDefault(t => t.userid == registration.userid);
+            if (user != null)
+            {
+                user.username = registration.username;
+                user.password = registration.password;
+                user.email = registration.email;
+                user.confirmpassword = registration.confirmpassword;
+
+            }
+            _context.SaveChanges();
+            return user;
+
         }
 
         public async Task<ActionResult<Registration>> DeleteRegistration(int id)
@@ -86,6 +98,11 @@ namespace SaveUrShowUsingCFA.Repository
             _context.Registration.Remove(registration);
             await _context.SaveChangesAsync();
             return registration;
+        }
+
+        private bool RegistrationExists(int id)
+        {
+            return _context.Registration.Any(e => e.userid == id);
         }
     }
 }

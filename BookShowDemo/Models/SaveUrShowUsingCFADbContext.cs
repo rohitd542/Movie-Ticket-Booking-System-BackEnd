@@ -14,15 +14,12 @@ namespace SaveUrShowUsingCFA.models
         {
 
         }
-       /* public virtual DbSet<Registration> Registration { get; set; }
-        public virtual DbSet<FindTicket> FindTicket { get; set; }
-        public virtual DbSet<BookTicket> BookTicket { get; set; }*/
-
+ 
         public DbSet<Registration> Registration { get; set; }
         public DbSet<FindTicket> FindTicket { get; set; }
         public DbSet<BookTicket> BookTicket { get; set; }
 
-        //Default value as a usertype as a Customer.
+        //Default Customer
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Registration>()
