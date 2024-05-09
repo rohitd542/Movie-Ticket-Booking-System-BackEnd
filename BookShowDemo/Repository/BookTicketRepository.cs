@@ -19,10 +19,9 @@ namespace SaveUrShowUsingCFA.Repository
         }
         public async Task<ActionResult<IEnumerable<BookTicket>>> GetBookTicket()
         {
-            // _logger.LogInformation["Getting all the users successfully."];
+        
             return await _context.BookTicket.ToListAsync();
-            //throw new NotImplementedException();
-        }
+               }
 
         public async Task<ActionResult<IEnumerable<BookTicket>>> GetBookTicketsByUserId(long userId)
         {

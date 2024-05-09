@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using SaveUrShowUsingCFA.models;
 using SaveUrShowUsingCFA.Repository;
 
@@ -55,12 +54,12 @@ namespace SaveUrShowUsingCFA.Controllers
         }
 
         [HttpPost("{email}/{password}")]
-        public async Task<ActionResult<Registration>> GetRegistration(string email, string password)
+        public async Task<ActionResult<Registration>>Login(string email, string password)
         {
             Hashtable err = new Hashtable();
             try
             {
-                var authUser = _registrationRepository.GetRegistration(email, password);
+                var authUser = _registrationRepository.Login(email, password);
                 if (authUser != null)
                 {
                     return Ok(authUser);

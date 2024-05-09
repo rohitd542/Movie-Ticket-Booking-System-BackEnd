@@ -29,10 +29,8 @@ namespace SaveUrShowUsingCFA.Repository
         }
         public async Task<ActionResult<IEnumerable<Registration>>> GetRegistration()
         {
-            // _logger.LogInformation["Getting all the users successfully."];
-            return await _context.Registration.ToListAsync();
-            //throw new NotImplementedException();
-        }
+                  return await _context.Registration.ToListAsync();
+                 }
 
         public async Task<ActionResult<Registration>> GetRegistration(int id)
         {
@@ -41,11 +39,9 @@ namespace SaveUrShowUsingCFA.Repository
             return registration;
         }
 
-        public LoginResponse GetRegistration(string email, string password)
+        public LoginResponse Login(string email, string password)
         {
-            /* var registration = await _context.Registration.FirstOrDefaultAsync(record => record.email == email && record.password == password);
-             return registration;*/
-            var userExist = _context.Registration.FirstOrDefault(t => t.email == email && EF.Functions.Collate(t.password, "SQL_Latin1_General_CP1_CS_AS") == password);
+                   var userExist = _context.Registration.FirstOrDefault(t => t.email == email && EF.Functions.Collate(t.password, "SQL_Latin1_General_CP1_CS_AS") == password);
             if (userExist != null)
             {
                 var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
@@ -75,10 +71,7 @@ namespace SaveUrShowUsingCFA.Repository
 
         public async Task<ActionResult<Registration>> PutRegistration(int id, Registration registration)
         {
-            /*context.Entry(registration).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-            return registration;*/
-            var user = _context.Registration.FirstOrDefault(t => t.userid == registration.userid);
+                    var user = _context.Registration.FirstOrDefault(t => t.userid == registration.userid);
             if (user != null)
             {
                 user.username = registration.username;

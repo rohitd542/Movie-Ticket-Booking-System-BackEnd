@@ -23,6 +23,9 @@ namespace SaveUrShowUsingCFA.models
 
 
 
+
+
+
         /*public virtual FindTicket Movie { get; set; }
         public virtual Registration User { get; set; }*/
 

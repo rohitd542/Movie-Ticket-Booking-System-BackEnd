@@ -20,10 +20,8 @@ namespace SaveUrShowUsingCFA.Repository
         }
         public async Task<ActionResult<IEnumerable<FindTicket>>> GetFindTicket()
         {
-            // _logger.LogInformation["Getting all the users successfully."];
-            return await _context.FindTicket.ToListAsync();
-            //throw new NotImplementedException();
-        }
+                  return await _context.FindTicket.ToListAsync();
+              }
 
         public async Task<ActionResult<FindTicket>> GetFindTicket(int id)
         {
